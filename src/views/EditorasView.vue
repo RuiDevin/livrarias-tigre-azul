@@ -3,18 +3,38 @@ import { v4 as uuidv4 } from "uuid";
 export default {
   data() {
     return {
-      editoras: [],
-      nova_editora: "",
+      editoras: [
+        {
+          id: "c11556b2-18d2-48d7-ac95-df6d0431f3e6",
+          nome: "Editora1",
+          site: "www.google",
+        },
+        {
+          id: "0204d8f7-52a5-463b-9d6f-3cf6d5ecffe9",
+          nome: "Editora2",
+          site: "www.google",
+        },
+        {
+          id: "2148db23-7480-40d7-9cea-ae5876b01886",
+          nome: "Editora3",
+          site: "www.google",
+        },
+      ],
+      novo_nome: "",
+      novo_site: "",
     };
   },
   methods: {
     salvar() {
-      if (this.nova_editora !== "") {
+      if ((this.novo_nome, this.novo_site !== "")) {
         const novo_id = uuidv4();
         this.editoras.push({
           id: novo_id,
-          nome: this.nova_editora,
+          nome: this.novo_nome,
+          site: this.novo_site,
         });
+        this.novo_nome = "";
+        this.novo_site = "";
       }
     },
     excluir(editora) {
@@ -26,91 +46,38 @@ export default {
 </script>
 
 <template>
-  <div class="container">
-    <div class="title">
-      <h2>Gerenciamento de Times</h2>
+  <main>
+    <div class="container">
+      <div class="title">
+        <h2>Cadastro de Editora</h2>
+      </div>
+      <div class="form-input">
+        <input type="text" placeholder="Nome" v-model="novo_nome" />
+        <input type="text" placeholder="Site" v-model="novo_site" />
+        <button @click="salvar">Salvar</button>
+      </div>
+      <div class="list-edit">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nome</th>
+              <th>Site</th>
+              <th>Excluir</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr v-for="editora in editoras" :key="editora.id">
+              <td>{{ editora.id }}</td>
+              <td>{{ editora.nome }}</td>
+              <td>{{ editora.site }}</td>
+              <button @click="excluir(editora)">Excluir</button>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-    <div class="form-input">
-      <input type="text" v-model="nova_editora" @keydown.enter="salvar" />
-      <button @click="salvar">Salvar</button>
-    </div>
-    <div class="list-times">
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Ações</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="editora in editoras" :key="editora.id">
-            <td>{{ editora.id }}</td>
-            <td>{{ editora.nome }}</td>
-            <td>
-              <button>Editar</button
-              ><button @click="excluir(editora)">Excluir</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-  <RouterView />
+  </main>
 </template>
 
-<style>
-.title {
-  text-align: center;
-  margin: 2rem 0;
-}
-
-.form-input {
-  display: flex;
-  justify-content: center;
-  margin: 2rem 0;
-}
-
-.form-input input {
-  width: 50%;
-  padding: 0.5rem;
-  border: 5px solid #98b7e1;
-  border-radius: 10px;
-}
-
-.form-input button {
-  padding: 0.5rem;
-  border: 5px solid #98b7e1;
-  border-radius: 10px;
-  color: #454663;
-  font-weight: bold;
-  margin-left: 1%;
-}
-
-.list-times {
-  display: flex;
-  justify-content: center;
-}
-
-table {
-  width: 80%;
-  border-collapse: collapse;
-  margin: 0 auto;
-  border: 1px solid #9bfae2;
-  font-size: 1.1rem;
-  text-align: center;
-}
-
-table thead {
-  background-color: #454663;
-  color: #9bfae2;
-}
-
-table thead th {
-  font-weight: bolder;
-}
-
-table tbody tr:nth-child(odd) {
-  background-color: #9bfae2;
-}
-</style>

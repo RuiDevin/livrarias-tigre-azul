@@ -8,6 +8,8 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "global": "^4.4.0",
+    "surge": "^0.23.1",
     "uuid": "^8.3.2",
     "vue": "^3.2.33",
     "vue-router": "^4.0.15"
