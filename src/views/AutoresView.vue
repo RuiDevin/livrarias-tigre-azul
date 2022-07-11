@@ -54,7 +54,7 @@ export default {
             <tr v-for="autor in autores" :key="autor.id">
               <td>{{ autor.id }}</td>
               <td>{{ autor.nome }}</td>
-              <button @click="excluir(autor)">Excluir</button>
+              <button class="button-excluir" @click="excluir(autor)">Excluir</button>
             </tr>
           </tbody>
         </table>

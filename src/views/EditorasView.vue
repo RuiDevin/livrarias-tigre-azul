@@ -72,7 +72,7 @@ export default {
               <td>{{ editora.id }}</td>
               <td>{{ editora.nome }}</td>
               <td>{{ editora.site }}</td>
-              <button @click="excluir(editora)">Excluir</button>
+              <button class="button-excluir" @click="excluir(editora)">Excluir</button>
             </tr>
           </tbody>
         </table>

@@ -23,7 +23,7 @@ export default {
       this.categorias.push(categoria_criada.data);
     },
     async excluir(categorias) {
-      await axios.delete(`http://localhost:4000/categorias/$ {categorias.id}`);
+      await axios.delete(`http://localhost:4000/categorias/${categorias.id}`);
       const indice = this.categorias.indexOf(categorias);
       this.categorias.splice(indice, 1);
     },
@@ -53,7 +53,7 @@ export default {
             <tr v-for="categoria in categorias" :key="categoria.id">
               <td>{{ categoria.id }}</td>
               <td>{{ categoria.nome }}</td>
-              <button @click="excluir(categoria)">Excluir</button>
+              <button class="button-excluir" @click="excluir(categoria)">Excluir</button>
             </tr>
           </tbody>
         </table>

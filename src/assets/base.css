@@ -57,6 +57,18 @@ a {
     color: black;
     font-weight: bold;
     margin-left: 1%;
+    
+  }
+
+  .button-excluir {
+    background-color: #2E399C;
+    padding: 0.5rem;
+    border: 1px solid #29f3e2;
+    border-radius: 10px;
+    color: black;
+    font-weight: bold;
+    margin-left: 15%;
+    
   }
 
   .list-liv {
