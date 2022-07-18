@@ -13,18 +13,15 @@ export default {
   },
   methods: {
     async salvar() {
-      const categorias = {
+      const categoria = {
         nome: this.nova_categoria,
       };
-      const categoria_criada = await axios.post(
-        "http://localhost:4000/categorias",
-        categorias
-      );
+      const categoria_criada = await axios.post("http://localhost:4000/categorias", categoria );
       this.categorias.push(categoria_criada.data);
     },
-    async excluir(categorias) {
-      await axios.delete(`http://localhost:4000/categorias/${categorias.id}`);
-      const indice = this.categorias.indexOf(categorias);
+    async excluir(categoria) {
+      await axios.delete(`http://localhost:4000/categorias/${categoria.id}`);
+      const indice = this.categorias.indexOf(categoria);
       this.categorias.splice(indice, 1);
     },
   },

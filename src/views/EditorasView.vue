@@ -1,43 +1,26 @@
 <script>
-import { v4 as uuidv4 } from "uuid";
+import axios from "axios";
 export default {
   data() {
     return {
-      editoras: [
-        {
-          id: "c11556b2-18d2-48d7-ac95-df6d0431f3e6",
-          nome: "Editora1",
-          site: "www.google",
-        },
-        {
-          id: "0204d8f7-52a5-463b-9d6f-3cf6d5ecffe9",
-          nome: "Editora2",
-          site: "www.google",
-        },
-        {
-          id: "2148db23-7480-40d7-9cea-ae5876b01886",
-          nome: "Editora3",
-          site: "www.google",
-        },
-      ],
-      novo_nome: "",
-      novo_site: "",
+      categorias: [],
+      nova_editora: "",
     };
   },
+  async created() {
+    const editoras = await axios.get("http://localhost:4000/editoras");
+    this.editoras = editoras.data;
+  },
   methods: {
-    salvar() {
-      if ((this.novo_nome, this.novo_site !== "")) {
-        const novo_id = uuidv4();
-        this.editoras.push({
-          id: novo_id,
-          nome: this.novo_nome,
-          site: this.novo_site,
-        });
-        this.novo_nome = "";
-        this.novo_site = "";
-      }
+    async salvar() {
+      const categoria = {
+        nome: this.nova_categoria,
+      };
+      const categoria_criada = await axios.post("http://localhost:4000/editoras", categoria );
+      this.categorias.push(categoria_criada.data);
     },
-    excluir(editora) {
+    async excluir(editora) {
+      await axios.delete(`http://localhost:4000/editoras/${editora.id}`);
       const indice = this.editoras.indexOf(editora);
       this.editoras.splice(indice, 1);
     },
