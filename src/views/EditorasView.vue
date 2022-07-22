@@ -1,29 +1,15 @@
 <script>
-import axios from "axios";
+
 export default {
   data() {
     return {
-      categorias: [],
+      editoras: [],
+      editora: {},
+      sites: [],
+      site: {},
       nova_editora: "",
+      novo_site: "",
     };
-  },
-  async created() {
-    const editoras = await axios.get("http://localhost:4000/editoras");
-    this.editoras = editoras.data;
-  },
-  methods: {
-    async salvar() {
-      const categoria = {
-        nome: this.nova_categoria,
-      };
-      const categoria_criada = await axios.post("http://localhost:4000/editoras", categoria );
-      this.categorias.push(categoria_criada.data);
-    },
-    async excluir(editora) {
-      await axios.delete(`http://localhost:4000/editoras/${editora.id}`);
-      const indice = this.editoras.indexOf(editora);
-      this.editoras.splice(indice, 1);
-    },
   },
 };
 </script>
@@ -35,8 +21,8 @@ export default {
         <h2>Cadastro de Editora</h2>
       </div>
       <div class="form-input">
-        <input type="text" placeholder="Nome" v-model="novo_nome" />
-        <input type="text" placeholder="Site" v-model="novo_site" />
+        <input type="text" placeholder="Nome" v-model="editora.nome" />
+        <input type="text" placeholder="Site" v-model="editora.site" />
         <button @click="salvar">Salvar</button>
       </div>
       <div class="list-edit">
